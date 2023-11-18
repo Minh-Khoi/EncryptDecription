@@ -1,9 +1,10 @@
+import random
 
 class SubstitutionCipher:
 
     def __init__(self) -> None:
         self.__alphabets= 'abcdefghijklmnopqrstuvwxyz'+"abcdefghijklmnopqrstuvwxyz".upper()
-        self.__digits = "1234567890"
+        self.__digits = "1234567890 "
         self.alphabets_digits = self.__alphabets + self.__digits
         self.fixed_length_key = len(self.alphabets_digits)
         pass
@@ -30,3 +31,12 @@ class SubstitutionCipher:
                 plaintext += char
         return plaintext
     
+    def containingDuplicate(self, key:str)-> bool:
+        hasDupl :bool=False
+        for i,lett in enumerate(key):
+            if lett in key[i+1:]:
+                return True
+        return False
+    
+    def createKey(self)->str:
+        return ''.join(random.sample(self.alphabets_digits, len(self.alphabets_digits)))

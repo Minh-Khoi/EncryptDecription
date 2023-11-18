@@ -1,7 +1,7 @@
 
 
 export class SubstitutionCipher{
-    private static alphabet : string ="abcdefghijklmnopqrstuvwxyz"+"abcdefghijklmnopqrstuvwxyz".toUpperCase();
+    private static alphabet : string ="abcdefghijklmnopqrstuvwxyz"+"abcdefghijklmnopqrstuvwxyz ".toUpperCase();
     private static digits : string = '1234567890';
     public static ALPHABETS_DIGITS = this.alphabet+this.digits;
 

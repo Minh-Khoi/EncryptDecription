@@ -1,16 +1,21 @@
 package dxc.uit.ways;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 public class SubstitutionNgramCipher {
 
-    private static final String alphabet = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-//    private static final int ngramSize = 2;
-//    private static final Map<String, String> ngramMap = createNgramMap();
+    public static final String alphabet = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int ngramSize = 2;
+	public static final int FIX_KEY_LENGTH = alphabet.length();
 
     public static String encrypt(String message, String key) {
-    	int ngramSize = 2;
     	Map<String, String> ngramMap = createNgramMap(key);
     	
         StringBuilder encryptedMessage = new StringBuilder();
@@ -26,7 +31,6 @@ public class SubstitutionNgramCipher {
     }
 
     public static String decrypt(String encryptedMessage, String key) {
-    	int ngramSize = 2;
     	Map<String, String> ngramMap = createNgramMap(key);
     	
         StringBuilder decryptedMessage = new StringBuilder();
@@ -60,5 +64,57 @@ public class SubstitutionNgramCipher {
         }
         return null;
     }
+    public static boolean containingDuplicate(String str) {
+    	boolean hasDuplicate = false;
+    	for (int i = 0; i < str.length(); i++) {
+    	    for (int j = i + 1; j < str.length(); j++) {
+    	        if (str.charAt(i) == str.charAt(j)) {
+    	            hasDuplicate = true;
+    	            break;
+    	        }
+    	    }
+    	    if (hasDuplicate) {
+    	        break;
+    	    }
+    	}
+    	return hasDuplicate;
+	}
 
+    public static String generateKey() {
+    	String originalString = alphabet;
+        List<Character> characters = new ArrayList<>();
+        for (char character : originalString.toCharArray()) {
+            characters.add(character);
+        }
+        
+        Collections.shuffle(characters, new Random());
+        StringBuilder shuffledStringBuilder = new StringBuilder();
+        for (char character : characters) {
+            shuffledStringBuilder.append(character);
+        }
+
+        String shuffledString = shuffledStringBuilder.toString();
+        while (shuffledString.length() != 63 || hasDuplicates(shuffledString)) {
+            Collections.shuffle(characters, new Random());
+            shuffledStringBuilder = new StringBuilder();
+            for (char character : characters) {
+                shuffledStringBuilder.append(character);
+            }
+            shuffledString = shuffledStringBuilder.toString();
+        }
+        System.out.println(shuffledString);
+        return shuffledString;
+    }
+
+    private static boolean hasDuplicates(String string) {
+        Set<Character> characters = new HashSet<>();
+        for (char character : string.toCharArray()) {
+            if (characters.contains(character)) {
+                return true;
+            }
+            characters.add(character);
+        }
+        return false;
+    }
+    
 }

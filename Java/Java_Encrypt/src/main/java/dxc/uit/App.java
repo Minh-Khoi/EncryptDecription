@@ -11,7 +11,7 @@ public class App
 {
 	public static void main(String[] args) {
 //		// Substitution Cipher
-//		String key = "RL4uDOPzyQwmCtT6UJrh3sgWIc0MX79nAYHdkpxjaGK15Blq8foSeFZVbEiNv2";
+//		String key = "RL4uDOPzyQwmCtT6UJrh3sgWIc0MX79nAYHdk pxjaGK15Blq8foSeFZVbEiNv2";
 //        String message = "Nguy3n Ngoc Hanh chau";
 //
 //        if (key.length() != SubstitutionCipher.FIX_KEY_LENGTH) {
@@ -26,16 +26,24 @@ public class App
 //        }
 
 		// Substitution Ngram Cipher 
-		String message = "Minh Khoi Vi Dai ! ahhh !i! 123";
-		String key = "RL4uDOPzyQwmCtT6UJrh3sgWIc0MX79nAYHdkpxjaGK15Blq8foSeFZV bEiNv2";
-		
-		if(message.length()%2 ==1) {
-			message += " ";
+		String message = "Enter a message To Encrypt: ";
+//		String key = "GYlj3yV5bMeNLRc0hTziSH9vW2JdqakZtgXPEf7 oDAUrw61IFpCsuBKQn4xm8O";
+		String key = SubstitutionNgramCipher.generateKey();
+		if(SubstitutionNgramCipher.containingDuplicate(key)) {
+			System.out.println("The key cannot contain duplicate character");
+		} else if (key.length() != SubstitutionNgramCipher.FIX_KEY_LENGTH) {
+			System.out.println("The key must be " +SubstitutionNgramCipher.FIX_KEY_LENGTH + " long");
+		} else {
+			System.out.println("Encrypt and decrypt message with key = "+key);
+			if(message.length()%2 ==1) {
+				message += " ";
+			}
+	        String encryptedMessage = SubstitutionNgramCipher.encrypt(message,key);
+	        System.out.println("Encrypted message: " + encryptedMessage);
+	        String decryptedMessage = SubstitutionNgramCipher.decrypt(encryptedMessage, key);
+	        System.out.println("Decrypted message: " + decryptedMessage);
+			
 		}
-        String encryptedMessage = SubstitutionNgramCipher.encrypt(message,key);
-        System.out.println("Encrypted message: " + encryptedMessage);
-        String decryptedMessage = SubstitutionNgramCipher.decrypt(encryptedMessage, key);
-        System.out.println("Decrypted message: " + decryptedMessage);
 		
 		
     }

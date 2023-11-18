@@ -1,6 +1,7 @@
 import { SubstitutionCipher } from "./ways/SubstitutionCipher";
 
-let key = 'j1r5t78yEaB2CDFGHIJKLMN3O4P6QS9UVWXZa0bcdefghjklmnopqrstuvwxyz';
+// key must be a shuffled string of 
+let key = 'j1r5t78yEaB2CDFGHIJKLMN3O4P6QS9UVWXZa0bcdefghjklmnopqrstuvwxyz '; 
 
 let plaintext = 'Enter a message To Encrypt: '
 
